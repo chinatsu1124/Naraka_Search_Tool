@@ -103,19 +103,15 @@ def analysis_recent_matches(r):
     for i in matches:
         # 判断英雄名称是否在heroes字典中，如果是，返回英雄名称，如果不是，返回英雄id
         if i['hero_id'] in heroes:
-            print('%s.游戏模式: %s 击杀数: %s 总伤害量: %s 评级: %s 使用英雄: %s 排名: %s 排位分: %s 分差: %s 时间: %s 总人数: %s' % (
-                str(count).zfill(2), mode[i['battle_tid']], i['kill_times'], i['damage'], i['grade'],
-                heroes[i['hero_id']], i['rank'],
-                i['rating'],
-                i['rating_delta'],
-                time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(i['time'])), i['total_users_count']))
+            hero = heroes[i['hero_id']]
         else:
-            print('%s.游戏模式: %s 击杀数: %s 总伤害量: %s 评级: %s 使用英雄: %s 排名: %s 排位分: %s 分差: %s 时间: %s 总人数: %s' % (
-                str(count).zfill(2), mode[i['battle_tid']], i['kill_times'], i['damage'], i['grade'],
-                i['hero_id'], i['rank'],
-                i['rating'],
-                i['rating_delta'],
-                time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(i['time'])), i['total_users_count']))
+            hero = i['hero_id']
+        print('%s.游戏模式: %s 击杀数: %s 总伤害量: %s 评级: %s 使用英雄: %s 排名: %s 排位分: %s 分差: %s 时间: %s 总人数: %s' % (
+            str(count).zfill(2), mode[i['battle_tid']], i['kill_times'], i['damage'], i['grade'],
+            hero, i['rank'],
+            i['rating'],
+            i['rating_delta'],
+            time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(i['time'])), i['total_users_count']))
         count += 1
 
 
