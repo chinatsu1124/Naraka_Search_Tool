@@ -13,7 +13,13 @@ def main():
                 print('未搜索到该角色名')
             else:
                 naraka.update(player_id, cookies)
-                res = naraka.get_result(player_id, '5000001', naraka.seasons['无妄赛季'], cookies)
+                print('-' * 40)
+                seasons = naraka.get_result(player_id, '5000001', 'pre-01', cookies)['result']['seasons']
+                print('全部赛季如下:')
+                for s in seasons:
+                    print(f"{s['value']}:{s['key']}")
+                season = input('请输入您想查询的赛季:\n')
+                res = naraka.get_result(player_id, '5000001', season, cookies)
                 while True:
                     func = input('1.查询概况\n2.查询最近战绩\n3.查询其他模式分数\n4.返回上层\n')
                     if func == '1':
@@ -34,7 +40,7 @@ def main():
                             if f == '7':
                                 break
                             else:
-                                res = naraka.get_result(player_id, modes[f], naraka.seasons['无妄赛季'], cookies)
+                                res = naraka.get_result(player_id, modes[f], season, cookies)
                                 naraka.analysis_overview(res)
                     else:
                         break

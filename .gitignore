@@ -1,4 +1,6 @@
 # Default ignored files
 .idea
 __pycache__
+result.py
+.DS_Store
 角色数据结构.xmind

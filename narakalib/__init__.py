@@ -97,6 +97,7 @@ def analysis_recent_matches(r):
         '1000013': '无尘',
         '1000015': '顾清寒',
         '1000016': '武田信忠',
+        '1000017': '殷紫萍'
     }
     matches = r['result']['matches']
     count = 1
@@ -121,5 +122,6 @@ seasons = {
     '浪潮赛季': 'wave',
     '破阵赛季': 'break',
     '凌霄赛季': 'sky',
-    '无妄赛季': 'unforeseen'
+    '无妄赛季': 'unforeseen',
+    '辉光赛季': 'glory'
 }
