@@ -19,6 +19,7 @@ def get_role_id(player_name, cookies):
             print('%s.角色名: %s 段位: %s 分数: %s 游戏场次: %s' % (
                 str(count).zfill(2), i['role_name'], i['level'], i['rank_score'], i['game_count']))
             count += 1
+        print('-' * 40)
         if len(user_list) == 1:
             s = 0
         else:
