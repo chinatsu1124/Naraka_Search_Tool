@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+import pandas as pd
 
 
 # 获取角色id
@@ -101,20 +102,16 @@ def analysis_recent_matches(r):
         '1000017': '殷紫萍'
     }
     matches = r['result']['matches']
-    count = 1
-    for i in matches:
-        # 判断英雄名称是否在heroes字典中，如果是，返回英雄名称，如果不是，返回英雄id
-        if i['hero_id'] in heroes:
-            hero = heroes[i['hero_id']]
-        else:
-            hero = i['hero_id']
-        print('%s.游戏模式: %s 击杀数: %s 总伤害量: %s 评级: %s 使用英雄: %s 排名: %s 排位分: %s 分差: %s 时间: %s 总人数: %s' % (
-            str(count).zfill(2), mode[i['battle_tid']], i['kill_times'], i['damage'], i['grade'],
-            hero, i['rank'],
-            i['rating'],
-            i['rating_delta'],
-            time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(i['time'])), i['total_users_count']))
-        count += 1
+    pd.set_option('display.unicode.east_asian_width', True)  # 设置输出右对齐
+    df = pd.DataFrame(matches, columns=['battle_tid', 'kill_times', 'damage', 'grade',
+                                        'hero_id', 'rank', 'rating', 'rating_delta',
+                                        'time', 'total_users_count'])
+    df['battle_tid'].replace(mode, inplace=True)
+    df['hero_id'].replace(heroes, inplace=True)
+    df['time'] = pd.to_datetime(df['time'], unit='s')
+    df['time'] = df['time'] + pd.Timedelta('08:00:00')
+    df.columns = ['游戏模式', '击杀数', '总伤害量', '评级', '使用英雄', '排名', '排位分', '分差', '时间', '总人数']
+    print(df)
 
 
 seasons = {
